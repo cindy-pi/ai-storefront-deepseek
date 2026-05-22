@@ -1,0 +1,55 @@
+:root {
+  --color-parchment: #f4e4bc;
+  --color-gold: #c9a84c;
+  --color-purple: #2d1b69;
+  --color-dark: #1a0a2e;
+  --color-warm-white: #fdf6e3;
+
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Crimson Text', serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-dark);
+  color: var(--color-warm-white);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-gold);
+}
+
+a {
+  color: var(--color-gold);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-parchment);
+}
+
+.page {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.page h1 {
+  margin-bottom: 1rem;
+}
+
+.page p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-parchment);
+}
