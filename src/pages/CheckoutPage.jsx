@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useShop } from '../context/ShopContext';
 
 export default function CheckoutPage() {
-  const { cart, cartTotal, goldBalance, checkout } = useShop();
+  const { cart, cartTotal, goldBalance, checkout, clearLastOrder } = useShop();
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
+
+  useEffect(() => {
+    clearLastOrder();
+  }, [clearLastOrder]);
 
   if (cart.length === 0) {
     return (
@@ -19,13 +23,14 @@ export default function CheckoutPage() {
   }
 
   const handlePurchase = () => {
-    const order = checkout();
+    const order = checkout(name, address);
     if (order) {
-      navigate(`/confirmation?order=${order.id}`);
+      navigate(`/confirmation`);
     }
   };
 
   const insufficientGold = cartTotal > goldBalance;
+  const canPurchase = name.trim() && address.trim() && !insufficientGold;
   const goldShortfall = cartTotal - goldBalance;
 
   return (
@@ -90,7 +95,7 @@ export default function CheckoutPage() {
           <button
             className="btn btn-gold btn-lg"
             onClick={handlePurchase}
-            disabled={insufficientGold}
+            disabled={!canPurchase}
           >
             Complete Purchase
           </button>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 
 const STORAGE_KEY = 'fizban_customer';
 const STARTING_BALANCE = 1000;
@@ -8,7 +8,7 @@ function loadCustomer() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
   } catch {}
-  return { goldBalance: STARTING_BALANCE, purchaseHistory: [] };
+  return { goldBalance: STARTING_BALANCE, purchaseHistory: [], lastOrder: null };
 }
 
 function customerReducer(state, action) {
@@ -18,12 +18,19 @@ function customerReducer(state, action) {
       return { ...state, goldBalance: newBalance };
     }
     case 'ADD_PURCHASE': {
-      const newBalance = Math.max(0, state.goldBalance - action.order.total);
+      const amount = action.order.grandTotal ?? action.order.total;
+      const newBalance = Math.max(0, state.goldBalance - amount);
       return {
         ...state,
         goldBalance: newBalance,
         purchaseHistory: [action.order, ...state.purchaseHistory],
       };
+    }
+    case 'SET_LAST_ORDER': {
+      return { ...state, lastOrder: action.order };
+    }
+    case 'CLEAR_LAST_ORDER': {
+      return { ...state, lastOrder: null };
     }
     default:
       return state;
@@ -39,8 +46,16 @@ export function CustomerProvider({ children }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(customer));
   }, [customer]);
 
+  const setLastOrder = useCallback((order) => {
+    dispatch({ type: 'SET_LAST_ORDER', order });
+  }, []);
+
+  const clearLastOrder = useCallback(() => {
+    dispatch({ type: 'CLEAR_LAST_ORDER' });
+  }, []);
+
   return (
-    <CustomerContext.Provider value={{ ...customer, dispatch }}>
+    <CustomerContext.Provider value={{ ...customer, dispatch, setLastOrder, clearLastOrder }}>
       {children}
     </CustomerContext.Provider>
   );
