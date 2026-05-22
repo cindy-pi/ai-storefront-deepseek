@@ -8,7 +8,7 @@ export default function Navbar() {
     <nav className="navbar">
       <Link to="/" className="navbar-brand">Fizban's Wands</Link>
       <div className="navbar-links">
-        <span className="navbar-gold">{goldBalance} gp</span>
+        <span className="navbar-gold">🪙 {goldBalance.toLocaleString()} gp</span>
         <Link to="/catalog">Catalog</Link>
         <Link to="/cart" className="cart-link">
           <span className="cart-icon">&#128092;</span>

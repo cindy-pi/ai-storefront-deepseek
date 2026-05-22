@@ -532,6 +532,51 @@ a:hover {
   font-size: 0.95rem;
 }
 
+/* ── Checkout Delivery Fields ── */
+
+.checkout-delivery-fields {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+.checkout-delivery-fields h2 {
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--color-gold);
+}
+
+.form-field input {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 6px;
+  background: var(--color-dark);
+  color: var(--color-warm-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-field input:focus {
+  border-color: var(--color-gold);
+}
+
+.form-field input::placeholder {
+  color: rgba(253, 246, 227, 0.4);
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 768px) {
