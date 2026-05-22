@@ -10,8 +10,8 @@ export default function HomePage() {
   return (
     <main className="page">
       <section className="hero">
-        <h1>Fizban's Wand Emporium</h1>
-        <p className="hero-subtitle">Discover enchanted wands for every wizard, sorcerer, and adventurer.</p>
+        <h1>✦ Fizban's Wand Emporium ✦</h1>
+        <p className="hero-subtitle">Discover enchanted wands for every wizard, sorcerer, and adventurer. <br />From the gleaming shelves of the Fabulous Fizban himself.</p>
         <Link to="/catalog" className="btn btn-gold btn-lg">Browse the Catalog</Link>
       </section>
 

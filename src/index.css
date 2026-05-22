@@ -127,21 +127,47 @@ a:hover {
   font-style: italic;
 }
 
+/* ── Page Transitions ── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page {
+  animation: fadeIn 0.35s ease-out;
+}
+
 /* ── Hero ── */
 
 .hero {
   text-align: center;
-  padding: 3rem 0;
+  padding: 4rem 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(45, 27, 105, 0.3) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 40px rgba(201, 168, 76, 0.3);
+  position: relative;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 /* ── Featured ── */
@@ -171,8 +197,9 @@ a:hover {
 }
 
 .wand-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   border-color: var(--color-gold);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.25);
 }
 
 .wand-visual {
@@ -860,6 +887,23 @@ a:hover {
   border-radius: 4px;
 }
 
+/* ── Not Found ── */
+
+.not-found {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.not-found h1 {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.not-found p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
 /* ── Print Styles ── */
 
 @media print {
@@ -942,6 +986,18 @@ a:hover {
 /* ── Responsive ── */
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links {
+    gap: 0.75rem;
+  }
+
   .checkout-layout {
     grid-template-columns: 1fr;
   }
@@ -956,5 +1012,58 @@ a:hover {
 
   .hero h1 {
     font-size: 1.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .scroll-body {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .navbar-brand {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .cart-item-qty {
+    justify-content: center;
+  }
+
+  .cart-item-total {
+    text-align: center;
+  }
+
+  .receipt-items-header,
+  .receipt-item {
+    grid-template-columns: 36px 1fr 30px 50px 50px;
+    font-size: 0.75rem;
   }
 }
